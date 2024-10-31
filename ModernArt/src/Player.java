@@ -45,13 +45,13 @@ public class Player {
      * To deal a painting to the player
      */
     public void dealPaintings(Painting painting) {
-        //TODO
+        boughtPaintings.add(painting);
     }
     /**
      * Get the name of the player
      */
     public String getName() {
-        //TODO
+        return name;
     }
     /**
      * To let the player to put up a painting for auction
@@ -61,8 +61,34 @@ public class Player {
      * such as checking if the index is valid. If it is invalid,
      * the player will need to enter the index again.
      */
+    private boolean validPaintingInput(int index) throws Exception{
+        if(index < 0 || 4 < index )
+            throw new Exception("Error input! No Such Painting");
+        for(Painting painting:handPaintings){
+            if(painting.getArtistId()==index)
+                return true;
+        }
+        System.out.println("Error input! You don't have this painting!");
+        return false;
+    }
     public Painting playPainting() {
-        //TODO
+        Scanner in = new Scanner(System.in);
+        int index;
+        while(true) {
+            System.out.print("Please put up a painting:");
+            try {
+                index = in.nextInt();
+                if (validPaintingInput(index)) {
+//                    handPaintings.remove(index);
+                    break;
+                }
+            } catch (Exception e) {
+                in.nextLine();
+                System.out.println(e.getMessage());
+            }
+        }
+        System.out.println("The player put up a painting by "+handPaintings.get(index).getArtistName());
+        return handPaintings.remove(index);
     }
     /**
      * Get the money the player has
