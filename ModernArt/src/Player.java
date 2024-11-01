@@ -39,6 +39,7 @@ public class Player {
      * Constructor of the Player class
      */
     public Player(int money) {
+        name = Integer.toString(totalPlayers);
         this.money = money;
     }
     /**
@@ -121,13 +122,13 @@ public class Player {
      * To let the player to pay
      */
     public void pay(int amount) {
-        //TODO
+        money-=amount;
     }
     /**
      * To let the player to earn
      */
     public void earn(int amount) {
-        //TODO
+        money+=amount;
     }
     /**
      * toString method that you need to override
@@ -148,6 +149,11 @@ public class Player {
      * after each round
      */    
     public void sellPainting(int[] scores) {
-        //TODO
+        int profit = 0;
+        for(Painting p:boughtPaintings){
+            profit += scores[p.getArtistId()];
+        }
+        money+=profit;
+        boughtPaintings.clear();
     }
 }

@@ -55,18 +55,26 @@ public class Player {
         return handPaintings.remove(index);
     }
 
+    public void sellPainting(int[] scores) {
+        int profit = 0;
+        for(Painting p:boughtPaintings){
+            profit += scores[p.getArtistId()];
+        }
+        money+=profit;
+        boughtPaintings.clear();
+    }
+
     public static void main(String[] args) {
         Player a = new Player(100);
-        a.handPaintings.add(new Painting(0));
-        a.handPaintings.add(new Painting(1));
-        a.handPaintings.add(new Painting(2));
-        Painting p = a.playPainting();
+        int[] score = {20,0,0,20,0};
+        a.boughtPaintings.add(new Painting(0));
+        a.boughtPaintings.add(new Painting(1));
+        a.boughtPaintings.add(new Painting(2));
+        a.boughtPaintings.add(new Painting(3));
+        a.boughtPaintings.add(new Painting(3));
+        a.boughtPaintings.add(new Painting(4));
+        a.boughtPaintings.add(new Painting(0));
+        a.sellPainting(score);
     }
-    public void test(){
-//        Player a = new Player(100);
-//        a.handPaintings.add(new Painting(0));
-//        a.handPaintings.add(new Painting(1));
-//        a.handPaintings.add(new Painting(2));
-//        a.playPainting();
-    }
+
 }
