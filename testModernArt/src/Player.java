@@ -1,4 +1,5 @@
 import java.util.ArrayList;
+import java.util.InputMismatchException;
 import java.util.List;
 import java.util.Scanner;
 
@@ -64,17 +65,50 @@ public class Player {
         boughtPaintings.clear();
     }
 
+    public int getMoney() {
+        return money;
+    }
+
+    private boolean validBid(int bid) throws Exception{
+        if(bid>=0 && bid <= getMoney())
+            return true;
+        else if(bid < 0)
+            throw new Exception("Error, You cannot bid a negative price!");
+        else
+            throw new Exception("Error, You don't have so much money!");
+    }
+
+
+    public int bid(int currentBid) {
+        Scanner in = new Scanner(System.in);
+        while(true){
+            try {
+                System.out.printf("Current bid is %d. You have $%d. Please input your bid: ",currentBid,getMoney());
+                int bid = in.nextInt();
+                if (validBid(bid)){
+                    return bid;
+                }
+            }catch (InputMismatchException e){
+                System.out.println("Error. Please input a number!");
+            }
+            catch (Exception e){
+                System.out.println(e.getMessage());
+            }
+        }
+    }
     public static void main(String[] args) {
         Player a = new Player(100);
-        int[] score = {20,0,0,20,0};
-        a.boughtPaintings.add(new Painting(0));
-        a.boughtPaintings.add(new Painting(1));
-        a.boughtPaintings.add(new Painting(2));
-        a.boughtPaintings.add(new Painting(3));
-        a.boughtPaintings.add(new Painting(3));
-        a.boughtPaintings.add(new Painting(4));
-        a.boughtPaintings.add(new Painting(0));
-        a.sellPainting(score);
+//        int[] score = {20,0,0,20,0};
+//        a.boughtPaintings.add(new Painting(0));
+//        a.boughtPaintings.add(new Painting(1));
+//        a.boughtPaintings.add(new Painting(2));
+//        a.boughtPaintings.add(new Painting(3));
+//        a.boughtPaintings.add(new Painting(3));
+//        a.boughtPaintings.add(new Painting(4));
+//        a.boughtPaintings.add(new Painting(0));
+//        a.sellPainting(score);
+        int bid = a.bid(100);
+        System.out.println(bid);
     }
 
 }

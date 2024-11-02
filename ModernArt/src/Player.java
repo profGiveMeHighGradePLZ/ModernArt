@@ -1,4 +1,5 @@
 import java.util.ArrayList;
+import java.util.InputMismatchException;
 import java.util.List;
 import java.util.Scanner;
 import java.util.concurrent.ThreadLocalRandom;
@@ -115,8 +116,32 @@ public class Player {
      * 
      * You should not assume there is only open auction when writing this method
      */
+
+    private boolean validBid(int bid) throws Exception{
+        if(bid>=0 && bid <= getMoney())
+            return true;
+        else if(bid < 0)
+            throw new Exception("Error, You cannot bid a negative price!");
+        else
+            throw new Exception("Error, You don't have so much money!");
+    }
+
     public int bid(int currentBid) {
-        //TODO
+        Scanner in = new Scanner(System.in);
+        while(true){
+            try {
+                System.out.printf("Current bid is %d. You have $%d. Please input your bid: ",currentBid,getMoney());
+                int bid = in.nextInt();
+                if (validBid(bid)){
+                    return bid;
+                }
+            }catch (InputMismatchException e){
+                System.out.println("Error. Please input a number!");
+            }
+            catch (Exception e){
+                System.out.println(e.getMessage());
+            }
+        }
     }
     /**
      * To let the player to pay

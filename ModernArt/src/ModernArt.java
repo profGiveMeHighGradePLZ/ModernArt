@@ -106,7 +106,7 @@ public class ModernArt {
      * Prepare the deck of paintings
      */
     public void prepareDeck() {
-
+        //TODO
         
         shuffle(deck);
     }
