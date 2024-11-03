@@ -63,20 +63,41 @@ public class Painting {
      * This method has been completed for you.
      * You should not modify this method.
      */
-//    public void sold() {
-//        System.out.println(this.toString() + " is sold to " + currentBidder + " for " + currentBid);
-//        if (currentBidder == null || owner == currentBidder) {
-//            //owner get the painting automatically
-//            owner.buyPainting(this);
-//            owner.pay(currentBid); //owner pay to the bank
-//        } else {
-//            //currentBidder get the painting
-//            currentBidder.buyPainting(this);
-//            currentBidder.pay(currentBid);
-//            //owner get the money
-//            owner.earn(currentBid);
-//            owner = currentBidder;
-//        }
-//
-//    }
+
+    public void sold() {
+        System.out.println(this.toString() + " is sold to " + currentBidder + " for " + currentBid);
+        if (currentBidder == null || owner == currentBidder) {
+            //owner get the painting automatically
+            owner.buyPainting(this);
+            owner.pay(currentBid); //owner pay to the bank
+        } else {
+            //currentBidder get the painting
+            currentBidder.buyPainting(this);
+            currentBidder.pay(currentBid);
+            //owner get the money
+            owner.earn(currentBid);
+            owner = currentBidder;
+        }
+
+    }
+
+    public String toString() {
+        return getArtistName();
+    }
+    public void auction(Player[] players) {
+        boolean deal = false;
+        do{
+            deal = true;
+            for(int i = 0;i<players.length;i++){
+
+                int bid = players[i].bid(currentBid);
+                if(bid > currentBid){
+                    currentBidder = players[i];
+                    currentBid = bid;
+                    deal = false;
+                }
+            }
+        }while(!deal);
+        sold();
+    }
 }

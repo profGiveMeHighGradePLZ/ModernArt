@@ -5,6 +5,8 @@ import java.util.Scanner;
 
 public class Player {
 //    private final String name;
+    private final String name;
+
     /**
      * The money the player has
      */
@@ -23,6 +25,7 @@ public class Player {
     private List<Painting> boughtPaintings = new ArrayList<>();
 
     public Player(int money) {
+        name = "Player "+Integer.toString(totalPlayers);
         this.money = money;
     }
 
@@ -96,8 +99,42 @@ public class Player {
             }
         }
     }
+    public void pay(int amount) {
+        money-=amount;
+    }
+    /**
+     * To let the player to earn
+     */
+    public void earn(int amount) {
+        money+=amount;
+    }
+    public void buyPainting(Painting Painting) {
+        boughtPaintings.add(Painting);
+    }
+    /**
+     * To sell all the paintings the player has bought to the bank
+     * after each round
+     */
+//    public void sellPainting(int[] scores) {
+//        for(Painting p:boughtPaintings){
+//            earn(scores[p.getArtistId()]);
+//        }
+//        boughtPaintings.clear();
+//    }
+
+    public String getName() {
+        return name;
+    }
+    public String toString() {
+        return getName();
+    }
+
     public static void main(String[] args) {
         Player a = new Player(100);
+        Player b = new Player(100);
+        Player c = new Player(100);
+        Player d = new Player(100);
+        Player[] players = {a,b,c,d};
 //        int[] score = {20,0,0,20,0};
 //        a.boughtPaintings.add(new Painting(0));
 //        a.boughtPaintings.add(new Painting(1));
@@ -107,8 +144,10 @@ public class Player {
 //        a.boughtPaintings.add(new Painting(4));
 //        a.boughtPaintings.add(new Painting(0));
 //        a.sellPainting(score);
-        int bid = a.bid(100);
-        System.out.println(bid);
+        Painting p = new Painting(0);
+        p.setOwner(a);
+        p.auction(players);
+
     }
 
 }

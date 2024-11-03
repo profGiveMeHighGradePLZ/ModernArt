@@ -40,7 +40,7 @@ public class Player {
      * Constructor of the Player class
      */
     public Player(int money) {
-        name = Integer.toString(totalPlayers);
+        name = "Player "+Integer.toString(totalPlayers);
         this.money = money;
     }
     /**
@@ -159,7 +159,7 @@ public class Player {
      * toString method that you need to override
      */
     public String toString() {
-        //TODO
+        return getName();
     }
     /**
      * To finalize a bid and purchase a painting
@@ -174,11 +174,9 @@ public class Player {
      * after each round
      */    
     public void sellPainting(int[] scores) {
-        int profit = 0;
         for(Painting p:boughtPaintings){
-            profit += scores[p.getArtistId()];
+            earn(scores[p.getArtistId()]);
         }
-        money+=profit;
         boughtPaintings.clear();
     }
 }
