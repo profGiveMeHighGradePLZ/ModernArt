@@ -106,8 +106,11 @@ public class ModernArt {
      * Prepare the deck of paintings
      */
     public void prepareDeck() {
-        //TODO
-        
+        for(int i = 0;i<INITIAL_COUNT.length;i++){
+            for(int j = 0;j<INITIAL_COUNT[i];j++){
+                deck.add(new Painting(i));
+            }
+        }
         shuffle(deck);
     }
     /**
@@ -118,7 +121,7 @@ public class ModernArt {
      * The parameter round indicate which round the game is currently in
      */
     public void dealPainting(int round) {
-        //TODO
+        //
     }
 
     /**
