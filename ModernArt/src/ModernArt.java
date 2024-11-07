@@ -121,7 +121,12 @@ public class ModernArt {
      * The parameter round indicate which round the game is currently in
      */
     public void dealPainting(int round) {
-        //
+        for(int i = 0;i<PRE_DEAL[noOfPlayers][round];i++){
+            for(int j = 0;j<noOfPlayers;j++){
+                players[j].dealPaintings(deck.remove(deck.size()-1));
+            }
+        }
+        deck.clear();
     }
 
     /**

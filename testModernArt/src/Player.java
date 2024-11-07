@@ -28,7 +28,9 @@ public class Player {
         name = "Player "+Integer.toString(totalPlayers);
         this.money = money;
     }
-
+    public void dealPaintings(Painting painting) {
+        handPaintings.add(painting);
+    }
     private boolean validPaintingInput(int index) throws Exception{
         if(index < 0 || 4 < index )
             throw new Exception("Error input! No Such Painting");

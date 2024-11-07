@@ -47,7 +47,7 @@ public class Player {
      * To deal a painting to the player
      */
     public void dealPaintings(Painting painting) {
-        boughtPaintings.add(painting);
+        handPaintings.add(painting);
     }
     /**
      * Get the name of the player

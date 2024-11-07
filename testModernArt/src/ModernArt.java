@@ -74,6 +74,7 @@ public class ModernArt {
             players[i] = new Player(INITIAL_MONEY);
         }
         prepareDeck();
+        dealPainting(1);
     }
     public void prepareDeck() {
         for(int i = 0;i<INITIAL_COUNT.length;i++){
@@ -91,7 +92,14 @@ public class ModernArt {
             deck.set(index, temp);
         }
     }
-
+    public void dealPainting(int round) {
+        for(int i = 0;i<PRE_DEAL[noOfPlayers][round];i++){
+            for(int j = 0;j<noOfPlayers;j++){
+                players[j].dealPaintings(deck.remove(deck.size()-1));
+            }
+        }
+        deck.clear();
+    }
     public static void main(String[] args) {
         ModernArt a = new ModernArt(3);
     }
