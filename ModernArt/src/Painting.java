@@ -96,7 +96,7 @@ public class Painting {
      * toString method to be modified
      */
     public String toString() {
-        return "Painting " + getArtistName();
+        return getArtistName()+" [" + TYPE + "] owner: " + getOwner();
     }
     /**
      * The auction method - open auction
@@ -113,15 +113,20 @@ public class Painting {
      */
     public void auction(Player[] players) {
         boolean deal = false;
+        int turn = 0;
         do{
+            deal = true;
             for(int i = 0;i<players.length;i++){
-                deal = true;
+                if(turn == players.length && !deal)
+                        break;
                 int bid = players[i].bid(currentBid);
                 if(bid > currentBid){
                     currentBidder = players[i];
                     currentBid = bid;
                     deal = false;
+                    turn = 0;
                 }
+                turn++;
             }
         }while(!deal);
         sold();

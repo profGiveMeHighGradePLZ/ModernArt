@@ -40,7 +40,7 @@ public class Player {
      * Constructor of the Player class
      */
     public Player(int money) {
-        name = "Player "+Integer.toString(totalPlayers);
+        name = "Player "+Integer.toString(totalPlayers++);
         this.money = money;
     }
     /**
@@ -48,6 +48,7 @@ public class Player {
      */
     public void dealPaintings(Painting painting) {
         handPaintings.add(painting);
+        painting.setOwner(this);
     }
     /**
      * Get the name of the player
@@ -77,7 +78,11 @@ public class Player {
         Scanner in = new Scanner(System.in);
         int index;
         while(true) {
-            System.out.print("Please put up a painting:");
+            System.out.println(getName()+" has $" + getMoney());
+            for(int i = 0;i<handPaintings.size();i++){
+                System.out.println(i+": "+handPaintings.get(i));
+            }
+            System.out.print("Please enter the index of the painting you want to play: ");
             try {
                 index = in.nextInt();
                 if (validPaintingInput(index)) {
@@ -130,7 +135,8 @@ public class Player {
         Scanner in = new Scanner(System.in);
         while(true){
             try {
-                System.out.printf("Current bid is %d. You have $%d. Please input your bid: ",currentBid,getMoney());
+                System.out.println(getName()+" has $"+getMoney());
+                System.out.printf("Current bid is %d. Please input your bid(enter 0 = forfeit): ",currentBid,getMoney());
                 int bid = in.nextInt();
                 if (validBid(bid)){
                     return bid;

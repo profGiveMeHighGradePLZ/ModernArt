@@ -126,6 +126,7 @@ public class ModernArt {
                 players[j].dealPaintings(deck.remove(deck.size()-1));
             }
         }
+
         deck.clear();
     }
 
@@ -139,7 +140,34 @@ public class ModernArt {
      * The parameter paintingCount indicates how many paintings each artist has sold in this round
      */
     public int[] updateScoreboard(int round, int[] paintingCount) {
-        //TODO
+        int[] index = new int[3];
+        boolean[] isMax = new boolean[paintingCount.length];
+        for(int i = 0;i< index.length;i++){
+            int max = Integer.MIN_VALUE;
+            int maxIndex = -1;
+            for(int j = 0;j<paintingCount.length;j++){
+                if(paintingCount[j] > max && !isMax[j]){
+                    max = paintingCount[j];
+                    maxIndex = j;
+                }
+            }
+            if(maxIndex != -1){
+                index[i] = maxIndex;
+                isMax[maxIndex] = true;
+            }
+        }
+
+
+
+
+        int[] score = new int[paintingCount.length];
+        for(int i = 0;i<index.length;i++){
+            scoreboard[round][index[i]] = SCORES[i];
+            for(int j = 0;j<round;j++){
+                score[index[i]] += scoreboard[j][index[i]];
+            }
+        }
+        return score;
     }
     /**
      * This is the main logic of the game and has been completed for you
