@@ -117,7 +117,7 @@ public class Painting {
         do{
             deal = true;
             for(int i = 0;i<players.length;i++){
-                if(turn == players.length && !deal)
+                if(turn == players.length && deal)
                         break;
                 int bid = players[i].bid(currentBid);
                 if(bid > currentBid){

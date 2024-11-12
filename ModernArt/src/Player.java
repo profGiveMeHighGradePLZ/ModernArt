@@ -65,14 +65,9 @@ public class Player {
      * the player will need to enter the index again.
      */
     private boolean validPaintingInput(int index) throws Exception{
-        if(index < 0 || 4 < index )
+        if(index < 0 || handPaintings.size() < index )
             throw new Exception("Error input! No Such Painting");
-        for(Painting painting:handPaintings){
-            if(painting.getArtistId()==index)
-                return true;
-        }
-        System.out.println("Error input! You don't have this painting!");
-        return false;
+        return true;
     }
     public Painting playPainting() {
         Scanner in = new Scanner(System.in);
@@ -86,16 +81,21 @@ public class Player {
             try {
                 index = in.nextInt();
                 if (validPaintingInput(index)) {
-//                    handPaintings.remove(index);
-                    break;
+                    System.out.println("The player put up a painting by "+handPaintings.get(index).getArtistName());
+                    return handPaintings.remove(index);
+//                    break;
                 }
-            } catch (Exception e) {
+            }catch (InputMismatchException e){
                 in.nextLine();
-                System.out.println(e.getMessage());
+                System.out.println("Error:" + e.getMessage());
+            }
+            catch (Exception e) {
+                in.nextLine();
+                System.out.println("Error: "+e);
             }
         }
-        System.out.println("The player put up a painting by "+handPaintings.get(index).getArtistName());
-        return handPaintings.remove(index);
+//        System.out.println("The player put up a painting by "+handPaintings.get(index).getArtistName());
+//        return handPaintings.remove(index);
     }
     /**
      * Get the money the player has
@@ -142,9 +142,11 @@ public class Player {
                     return bid;
                 }
             }catch (InputMismatchException e){
+                in.nextLine();
                 System.out.println("Error. Please input a number!");
             }
             catch (Exception e){
+                in.nextLine();
                 System.out.println(e.getMessage());
             }
         }

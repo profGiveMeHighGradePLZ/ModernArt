@@ -126,8 +126,7 @@ public class ModernArt {
                 players[j].dealPaintings(deck.remove(deck.size()-1));
             }
         }
-
-        deck.clear();
+//        deck.clear();
     }
 
     /**
@@ -163,7 +162,7 @@ public class ModernArt {
         int[] score = new int[paintingCount.length];
         for(int i = 0;i<index.length;i++){
             scoreboard[round][index[i]] = SCORES[i];
-            for(int j = 0;j<round;j++){
+            for(int j = 0;j<=round;j++){
                 score[index[i]] += scoreboard[j][index[i]];
             }
         }
