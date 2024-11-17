@@ -139,13 +139,13 @@ public class ModernArt {
      * The parameter paintingCount indicates how many paintings each artist has sold in this round
      */
     public int[] updateScoreboard(int round, int[] paintingCount) {
-        int[] index = new int[3];
+        int[] index = {-1,-1,-1};
         boolean[] isMax = new boolean[paintingCount.length];
         for(int i = 0;i< index.length;i++){
             int max = Integer.MIN_VALUE;
             int maxIndex = -1;
             for(int j = 0;j<paintingCount.length;j++){
-                if(paintingCount[j] > max && !isMax[j]){
+                if(paintingCount[j] > max && !isMax[j] && paintingCount[j] != 0){
                     max = paintingCount[j];
                     maxIndex = j;
                 }
@@ -161,9 +161,11 @@ public class ModernArt {
 
         int[] score = new int[paintingCount.length];
         for(int i = 0;i<index.length;i++){
-            scoreboard[round][index[i]] = SCORES[i];
-            for(int j = 0;j<=round;j++){
-                score[index[i]] += scoreboard[j][index[i]];
+            if(index[i] != -1) {
+                scoreboard[round][index[i]] = SCORES[i];
+                for (int j = 0; j <= round; j++) {
+                    score[index[i]] += scoreboard[j][index[i]];
+                }
             }
         }
         return score;
@@ -199,7 +201,7 @@ public class ModernArt {
             //update score board
             int[] scoreForThisRound = updateScoreboard(round, paintingCount);
             System.out.println("Print the score board after auction");
-            System.out.print("\t\t");
+            System.out.print("\t\t\t");
             for (int j = 0; j < Painting.ARTIST_NAMES.length; j++) {
                 System.out.print( "\t" + j);
             }

@@ -167,7 +167,7 @@ public class Player {
      * toString method that you need to override
      */
     public String toString() {
-        return getName();
+        return getName() + " has $" + getMoney();
     }
     /**
      * To finalize a bid and purchase a painting
